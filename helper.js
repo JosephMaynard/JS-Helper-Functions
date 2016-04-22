@@ -20,7 +20,7 @@ var h = {
 
 	style: function(element, attributes){
 		var prefix = ['transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility'];
-		for(style in attributes){
+		for(var style in attributes){
 			if(prefix.indexOf(style) > -1){
 				element.style['ms' + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
 				element.style['moz' + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
@@ -31,7 +31,7 @@ var h = {
 	},
 
 	param: function(element, attributes){
-		for(param in attributes){
+		for(var param in attributes){
 			element[param] = attributes[param];
 		}
 	},
