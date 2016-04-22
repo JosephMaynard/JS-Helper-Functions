@@ -1,8 +1,8 @@
-h = {
+var h = {
 
 	el: {},
 
-	h = this,
+	h: this,
 
 	create: function(name, type, parent){
 		if(!this.el.hasOwnProperty(name)){
@@ -37,7 +37,17 @@ h = {
 	},
 
 	random: function(min, max){
-		return Math.round(Math.random() * (max - min)) + min;
+		if(typeof max === 'number' && typeof min === 'number'){
+			return Math.round(Math.random() * (max - min)) + min;
+		} else if(typeof min === 'number'){
+			return Math.round(Math.random() * min);
+		} else if(typeof max === 'undefined' && typeof min === 'undefined'){
+			if(Math.random() > 0.5){
+				return true;
+			} else {
+				return false;
+			}
+		}
 	},
 
 	preloadImages: function(imagePath, imageArray, callBack){
