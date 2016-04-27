@@ -51,7 +51,8 @@ var h = {
 	},
 
 	preloadImages: function(imagePath, imageArray, callBack){
-		var preloadedImages = [];
+		var preloadedImages = [],
+			preloadCounter = 0;
 		for(var i = 0; i < imageArray.length; i++){
 			this.loadImg(imagePath + imageArray[i], function(){
 				preloadCounter++;
