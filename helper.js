@@ -4,29 +4,41 @@ var h = {
 
 	h: this,
 
+	prefix: ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility'],
+
+	prefixes: ['ms', 'moz', 'o', 'webkit'],
+	
+
 	create: function(name, type, parent){
 		if(!this.el.hasOwnProperty(name)){
 			this.el[name] = document.createElement(type);
 			if(typeof parent != 'undefined'){
 				parent.appendChild(this.el[name]);
 			}
+			this.el[name].updateStyles = function (attributes){
+				h.style(this, attributes);
+			}
 		} else {
 			console.error('Element with name ' + name + ' already exists.');
-		}
-		this.el[name].updateStyles = function (attributes){
-			h.style(this, attributes);
 		}
 	},
 
 	style: function(element, attributes){
-		var prefix = ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility'];
 		for(var style in attributes){
-			if(prefix.indexOf(style) > -1){
-				element.style['ms' + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
-				element.style['moz' + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
-				element.style['webkit' + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
+			if(h.prefix.indexOf(style) > -1){
+				for (var i = 0; i < h.prefixes.length; i++) {
+					element.style[h.prefixes[i] + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
+				}
 			}
 			element.style[style] = attributes[style];
+		}
+	},
+
+	unCamelCase: function(attribute){
+		if(attribute === attribute.toLowerCase()){
+			return attribute;
+		} else {
+			return attribute.replace( /([a-z])([A-Z])/g, '$1-$2' ).toLowerCase();
 		}
 	},
 
