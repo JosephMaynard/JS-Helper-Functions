@@ -13,13 +13,13 @@ var h = {
 		} else {
 			console.error('Element with name ' + name + ' already exists.');
 		}
-		this.el[name].styler = function (attributes){
+		this.el[name].updateStyles = function (attributes){
 			h.style(this, attributes);
 		}
 	},
 
 	style: function(element, attributes){
-		var prefix = ['transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility'];
+		var prefix = ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility'];
 		for(var style in attributes){
 			if(prefix.indexOf(style) > -1){
 				element.style['ms' + style.charAt(0).toUpperCase() + style.slice(1)] = attributes[style];
