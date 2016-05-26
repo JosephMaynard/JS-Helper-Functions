@@ -16,7 +16,7 @@ var h = {
 				parent.appendChild(h.el[name]);
 			}
 			h.el[name].updateStyles = function (attributes){
-				h.style(h, attributes);
+				h.style(this, attributes);
 			}
 			return h.el[name];
 		} else {
