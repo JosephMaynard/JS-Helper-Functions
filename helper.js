@@ -10,17 +10,47 @@ var h = {
 	
 
 	create: function(name, type, parent){
-		if(!this.el.hasOwnProperty(name)){
-			this.el[name] = document.createElement(type);
+		if(!h.el.hasOwnProperty(name)){
+			h.el[name] = document.createElement(type);
 			if(typeof parent != 'undefined'){
-				parent.appendChild(this.el[name]);
+				parent.appendChild(h.el[name]);
 			}
-			this.el[name].updateStyles = function (attributes){
-				h.style(this, attributes);
+			h.el[name].updateStyles = function (attributes){
+				h.style(h, attributes);
 			}
+			return h.el[name];
 		} else {
 			console.error('Element with name ' + name + ' already exists.');
 		}
+	},
+
+	createKeyframes: function(identifier, keyframes){
+		var result = '';
+		for (var i = 0; i < h.prefixes.length; i++) {
+			result += '@-' + h.prefixes[i] + '-keyframes ' + identifier + ' {\n';
+			for(var keyframe in keyframes){
+				result += '\t' + keyframe + ' {\n';
+				for(var style in keyframes[keyframe]){
+					if(h.prefix.indexOf(style) > -1){
+						var prefixedStyle = '-' + h.prefixes[i] + '-' + style;
+						result += '\t\t' + h.unCamelCase(prefixedStyle) + ': ' + keyframes[keyframe][style] + ';\n';
+					}
+					result += '\t\t' + h.unCamelCase(style) + ': ' + keyframes[keyframe][style] + ';\n';
+				}
+				result += '\t}\n';
+			}
+			result += '}\n';
+		}
+		result += '@keyframes ' + identifier + ' {\n';
+		for(var keyframe in keyframes){
+			result += '\t' + keyframe + ' {\n';
+			for(var style in keyframes[keyframe]){
+				result += '\t\t' + h.unCamelCase(style) + ': ' + keyframes[keyframe][style] + ';\n';
+			}
+			result += '\t}\n';
+		}
+		result += '}\n';
+		return result;
 	},
 
 	style: function(element, attributes){
