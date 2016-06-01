@@ -112,3 +112,20 @@ var h = {
 	}
 
 }
+
+function Create(type, parent){
+	this.el = document.createElement(type);
+	if(parent){
+		parent.appendChild(this.el);
+	}
+	return this;
+}
+
+Create.prototype.style = function(attributes){
+	h.style(this.el, attributes);
+}
+
+Create.prototype.param = function(attributes){
+	h.param(this.el, attributes);
+}
+
