@@ -4,7 +4,7 @@ var h = {
 
 	h: this,
 
-	prefix: ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility'],
+	prefix: ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility', 'boxShadow'],
 
 	prefixes: ['ms', 'moz', 'o', 'webkit'],
 	
@@ -123,9 +123,11 @@ function Create(type, parent){
 
 Create.prototype.style = function(attributes){
 	h.style(this.el, attributes);
+	return this;
 }
 
 Create.prototype.param = function(attributes){
 	h.param(this.el, attributes);
+	return this;
 }
 
