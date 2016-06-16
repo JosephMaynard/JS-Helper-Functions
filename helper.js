@@ -24,6 +24,21 @@ var h = {
 		}
 	},
 
+	createCSSRule: function(selector, declarationBlock){
+		var result = '';
+		result += selector + ' {\n';
+		for(var style in declarationBlock){
+			if(h.prefix.indexOf(style) > -1){
+				for (var i = 0; i < h.prefixes.length; i++) {
+					result += '\t-' + h.prefixes[i] + '-' + h.unCamelCase(style) + ': ' + declarationBlock[style] + ';\n';
+				}
+			}
+			result += '\t' + h.unCamelCase(style) + ': ' + declarationBlock[style] + ';\n';
+		}
+		result += '}\n';
+		return result;
+	},
+
 	createKeyframes: function(identifier, keyframes){
 		var result = '';
 		for (var i = 0; i < h.prefixes.length; i++) {
