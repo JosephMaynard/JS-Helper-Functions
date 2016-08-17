@@ -4,7 +4,7 @@ var h = {
 
 	h: this,
 
-	prefix: ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility', 'boxShadow'],
+	prefix: ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'transform', 'transformOrigin', 'transformStyle', 'transition', 'perspective', 'transformStyle', 'transitionTimingFunction', 'backfaceVisibility', 'boxShadow'],
 
 	prefixes: ['ms', 'moz', 'o', 'webkit'],
 	
