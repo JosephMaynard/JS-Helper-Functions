@@ -166,7 +166,11 @@ var h = {
 function Create(type, parent){
 	this.el = document.createElement(type);
 	if(parent){
-		parent.appendChild(this.el);
+		if(parent.el){
+			parent.el.appendChild(this.el);
+		} else {
+			parent.appendChild(this.el);			
+		}
 	}
 	return this;
 }
