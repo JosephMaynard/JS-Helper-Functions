@@ -124,6 +124,41 @@ var h = {
 		if(typeof callBack === "function"){
 			pixel.onload = callBack;
 		}
+	},
+
+	// Function to detect taps just using touch events
+	// Some Ad Servers automatically opens a web view if any onclick event listeners are fired
+	touchTap: function(target, callback) {
+
+		var touchPoints = {
+			startX: 0,
+			startY: 0,
+			endX: 0,
+			endY: 0,
+			// Set tolerance of tap here in pixels as Samsung Galaxy S5 and S6 return 
+			// slightly different X and Y values for touchstart and touchend events
+			tolerance: 10
+		};
+
+		target.addEventListener("touchstart", handleStart, true);
+		target.addEventListener("touchend", handleEnd, true);
+
+		function handleStart(e){
+			touchPoints.startX = e.touches[0].pageX;
+			touchPoints.startY = e.touches[0].pageY;
+		}
+
+		function handleEnd(e){
+			touchPoints.endX = e.changedTouches[0].pageX;
+			touchPoints.endY = e.changedTouches[0].pageY;
+
+			if(Math.abs( touchPoints.endX -  touchPoints.startX) < touchPoints.tolerance && Math.abs( touchPoints.endY -  touchPoints.startY) < touchPoints.tolerance ) {
+				if (typeof callback === 'function'){
+					callback();
+				}   
+			}
+		}
+
 	}
 
 }
